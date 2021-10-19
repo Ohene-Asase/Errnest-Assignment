@@ -1,0 +1,9 @@
+{
+    
+        "/api/*": {
+            "target": "http://apilayer.net/api",
+            "secure": false,
+            "logLevel": "debug"
+        }
+    
+}

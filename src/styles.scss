@@ -1,1 +1,19 @@
+
+
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+    font-family: "sofia-pro", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif";
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: #f4f4f4 !important;
+    height: 100vh;
+    width: 100%;
+    color: #24355a;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
