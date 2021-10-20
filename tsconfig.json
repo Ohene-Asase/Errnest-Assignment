@@ -5,6 +5,7 @@
   },
   "compilerOptions": {
     "module": "esnext",
+    // "types": ["cypress","jest"],
     "paths": {
       "core-js/es7/reflect": [
         "node_modules/core-js/proposals/reflect-metadata",
