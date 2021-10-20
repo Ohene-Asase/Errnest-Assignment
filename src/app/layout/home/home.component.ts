@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { NotificationService } from 'src/app/services/notification.service';
-import Swal from 'sweetalert2';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogBodyComponent } from 'src/app/dialog-body/dialog-body.component';
 
 
@@ -14,51 +13,45 @@ import { DialogBodyComponent } from 'src/app/dialog-body/dialog-body.component';
 })
 export class HomeComponent implements OnInit {
   phoneNumberValidationForm: FormGroup;
-  countries = []
+  alphatwoCodeDetails = []
+  errorMessage: any;
 
-  constructor(private fb: FormBuilder,
-              private dataService: DataService,
-              private toaster: NotificationService,
-              public dialog: MatDialog,
-              private matDialog: MatDialog
-
+  constructor(
+    private fb: FormBuilder,
+    private dataService: DataService,
+    private toaster: NotificationService,
+    public dialog: MatDialog,
+    private matDialog: MatDialog
+    
   ) { }
 
   ngOnInit(): void {
     this.setupForm();
-    this.getCountries();
+    this.getalphaTwoCode();
   }
 
   async sendPhoneNumber(params) {
     try {
       const results = await this.dataService.verifyNumber(params)
-      console.log(results)
-      if(results.valid){
-       this.openDialog(results);
-      } else
-      if(!results.valid){
-       this.toaster.showError("Number is invalid");
-      }
+       results.valid ? this.toaster.showSucess('Number is valid') : this.toaster.showError(results.error.info);
 
-    } catch (error) {
-
-    }
+    } catch (error) { console.error(error) }
   }
 
-  async getCountries() {
+  async getalphaTwoCode() {
     try {
-      const results = await this.dataService.fetchCountries();
+      const results = await this.dataService.fetchalalphaTwoCode();
       let keys = Object.keys(results);
-      let countries = [];
+      let items = [];
       keys.forEach(key => {
-        countries.push({
+        items.push({
           alphaTwoCode: key,
           name: results[key].country_name,
           diallingCode: results[key].dialling_code
         })
       })
 
-      this.countries = countries
+      this.alphatwoCodeDetails = items
     } catch (error) {
 
     }
@@ -70,18 +63,18 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  openDialog(result) {
-    const dialogConfig = new MatDialogConfig();
-    this.matDialog.open(DialogBodyComponent, {
-      data:result,
-      height: '400px',
-      width: '600px',
-    });
-    
-  }
+  // openDialog(result) {
+  //   const dialogConfig = new MatDialogConfig();
+  //   this.matDialog.open(DialogBodyComponent, {
+  //     data: result,
+  //     height: '400px',
+  //     width: '600px',
+  //   });
 
-  getRequiredMessage(){
-    if(this.phoneNumberValidationForm.controls.number.hasError('required'))
-    return 'You must enter a phone number'
+  // }
+
+  getRequiredMessage() {
+    if (this.phoneNumberValidationForm.controls.number.hasError('required'))
+      return 'You must enter a phone number'
   }
 }

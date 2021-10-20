@@ -1,3 +1,4 @@
+import { registerLocaleData } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -11,9 +12,9 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 export class DialogBodyComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {data: string}) { }
-   info = this.data
+  //  info = JSON.parse(this.data)
   ngOnInit(): void {
-    console.log(this.data)
+    console.log(this.data);
   }
 
 }
