@@ -15,7 +15,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   verifyNumber(param: any) {
-    const req = this.http.get(`http://apilayer.net/api/validate?access_key=eb588dbf70cb81df1c8d374269db9d18&number=${param.number}&country_code=${param.country_code}`);
+    const req = this.http.get<any>(`http://apilayer.net/api/validate?access_key=eb588dbf70cb81df1c8d374269db9d18&number=${param.number}&country_code=${param.country_code}`);
     console.log(req);
     return lastValueFrom(req);
   }

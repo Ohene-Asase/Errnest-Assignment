@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DataService } from 'src/app/service/data.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataService } from 'src/app/services/data.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import Swal from 'sweetalert2';
+import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DialogBodyComponent } from 'src/app/dialog-body/dialog-body.component';
+
 
 @Component({
   selector: 'app-home',
@@ -8,11 +13,15 @@ import { DataService } from 'src/app/service/data.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  phoneNumberForm: FormGroup;
+  phoneNumberValidationForm: FormGroup;
   countries = []
 
   constructor(private fb: FormBuilder,
-    private dataService: DataService
+              private dataService: DataService,
+              private toaster: NotificationService,
+              public dialog: MatDialog,
+              private matDialog: MatDialog
+
   ) { }
 
   ngOnInit(): void {
@@ -24,6 +33,12 @@ export class HomeComponent implements OnInit {
     try {
       const results = await this.dataService.verifyNumber(params)
       console.log(results)
+      if(results.valid){
+       this.openDialog(results);
+      } else
+      if(!results.valid){
+       this.toaster.showError("Number is invalid");
+      }
 
     } catch (error) {
 
@@ -42,16 +57,31 @@ export class HomeComponent implements OnInit {
           diallingCode: results[key].dialling_code
         })
       })
-      console.log(countries)
+
       this.countries = countries
     } catch (error) {
 
     }
   }
   setupForm() {
-    this.phoneNumberForm = this.fb.group({
-      number: null,
+    this.phoneNumberValidationForm = this.fb.group({
+      number: [null, [Validators.required]],
       country_code: null
     })
+  }
+
+  openDialog(result) {
+    const dialogConfig = new MatDialogConfig();
+    this.matDialog.open(DialogBodyComponent, {
+      data:result,
+      height: '400px',
+      width: '600px',
+    });
+    
+  }
+
+  getRequiredMessage(){
+    if(this.phoneNumberValidationForm.controls.number.hasError('required'))
+    return 'You must enter a phone number'
   }
 }

@@ -35,6 +35,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-toastr/toastr.css",
               "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
@@ -86,7 +87,6 @@
           "configurations": {
             "production": {
               "browserTarget": "Ernest-Assignment:build:production"
-          
             },
             "development": {
               "browserTarget": "Ernest-Assignment:build:development"
@@ -114,14 +114,40 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-               "src/styles.scss",
-           
-             
+              "src/styles.scss"
             ],
-            "scripts": [
-          
-
-            ]
+            "scripts": []
+          }
+        },
+        "cypress-run": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "Ernest-Assignment:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Ernest-Assignment:serve:production"
+            }
+          }
+        },
+        "cypress-open": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "watch": true,
+            "headless": false
+          }
+        },
+        "e2e": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "devServerTarget": "Ernest-Assignment:serve",
+            "watch": true,
+            "headless": false
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "Ernest-Assignment:serve:production"
+            }
           }
         }
       }
