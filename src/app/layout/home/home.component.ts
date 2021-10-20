@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogBodyComponent } from 'src/app/dialog-body/dialog-body.component';
+
 
 
 @Component({
@@ -63,15 +63,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  // openDialog(result) {
-  //   const dialogConfig = new MatDialogConfig();
-  //   this.matDialog.open(DialogBodyComponent, {
-  //     data: result,
-  //     height: '400px',
-  //     width: '600px',
-  //   });
-
-  // }
 
   getRequiredMessage() {
     if (this.phoneNumberValidationForm.controls.number.hasError('required'))
