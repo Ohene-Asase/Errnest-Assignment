@@ -12,7 +12,7 @@ export class NotificationService {
     this.toastr.success(message,title);
   }
 
-  showError(message,title?){
+  showError(message?,title?){
    this.toastr.error(message,title, { timeOut: 0, extendedTimeOut: 0 })
   }
 
