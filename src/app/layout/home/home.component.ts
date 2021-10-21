@@ -14,9 +14,10 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 export class HomeComponent implements OnInit {
   phoneNumberValidationForm: FormGroup;
   alphatwoCodeDetails = []
-  errorMessage: any;
-  validationResponse: any;
-  public alphatwocodeData: object;
+  errorMessage: string;
+  validationResponse: string;
+  alphatwocodeData: object;
+  
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
