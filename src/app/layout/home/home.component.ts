@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Country } from 'src/app/interface/data.model';
 
 
 
@@ -13,11 +14,11 @@ import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angu
 })
 export class HomeComponent implements OnInit {
   phoneNumberValidationForm: FormGroup;
-  alphatwoCodeDetails = []
+  countriesDetails: Country[]
   errorMessage: string;
   validationResponse: string;
-  alphatwocodeData: object;
-  
+  countries: object;
+
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
@@ -28,8 +29,9 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getalphaTwoCode();
     this.setupForm();
+    this.getCountries();
+  
   }
 
   async sendPhoneNumber(params) {
@@ -44,22 +46,23 @@ export class HomeComponent implements OnInit {
     } catch (error) { console.error(error) }
   }
 
-  getalphaTwoCode() {
-    this.dataService.fetchalalphaTwoCode()
+  getCountries() {
+    this.dataService.fetchCountries()
       .subscribe((data) => {
+        console.log(data)
         if(data){
-          this.alphatwocodeData = data
-          let keys = Object.keys(this.alphatwocodeData);
+          this.countries = data
+          let keys = Object.keys(this.countries);
           let items = [];
           keys.forEach(key => {
             items.push({
               alphaTwoCode: key,
-              name: this.alphatwocodeData[key].country_name,
-              diallingCode: this.alphatwocodeData[key].dialling_code
+              name: this.countries[key].country_name,
+              diallingCode: this.countries[key].dialling_code
             })
           })
       
-         this.alphatwoCodeDetails = items
+         this.countriesDetails = items
        
         }
       })

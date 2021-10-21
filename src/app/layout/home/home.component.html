@@ -16,8 +16,8 @@
           <mat-label>alphaTwoCode</mat-label>
           
           <mat-select  id="country_code" formControlName="country_code" >
-            <mat-option *ngFor="let country_code of alphatwoCodeDetails"  [value]="country_code.alphaTwoCode">
-              {{country_code.alphaTwoCode}}
+            <mat-option *ngFor="let countryDetail of countriesDetails"  [value]="countryDetail.alphaTwoCode">
+              {{countryDetail.alphaTwoCode}}
             </mat-option>
           </mat-select> 
       

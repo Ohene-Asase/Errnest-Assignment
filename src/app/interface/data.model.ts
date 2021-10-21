@@ -1,17 +1,18 @@
-export interface numberVerificationModel {
+export interface NumberVerificationResponse{
    number: string,
    country_code: string ,
-   error?: error,
- 
+   error?: Error,
+   valid: boolean;
+
 }
 
-export interface  alphaCodeModel {
+export interface Country{
     country_name: string,
-    dialing_code: string
+    dialing_code: string,
+    alphaTwoCode: string
+
 }
 
-export interface error {
+interface Error {
     info: any;
-    valid: any;
-    invalid: any;
 }
