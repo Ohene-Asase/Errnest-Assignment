@@ -2,7 +2,7 @@ export interface NumberVerificationResponse{
    number: string,
    country_code: string ,
    error?: Error,
-   valid: boolean;
+   valid?: boolean;
 
 }
 

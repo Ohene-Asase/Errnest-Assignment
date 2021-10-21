@@ -34,22 +34,24 @@ export class HomeComponent implements OnInit {
   
   }
 
-  async sendPhoneNumber(params) {
-    try {
-      const results = await this.dataService.verifyNumber(params)
-        if(results.valid){ this.toaster.showSucess('Number is Valid') }
-          else  {
-           results.error?.info ? this.toaster.showError(results.error?.info)  : this.toaster.showError('Number is invalid');   
-         }
+  sendPhoneNumber(params) {
+   this.dataService.verifyNumber(params)
+     .subscribe((data) => {
+       let results = data
+       if(results.valid){ this.toaster.showSucess('Number is Valid') }
+       else  {
+        results.error?.info ? this.toaster.showError(results.error?.info)  : this.toaster.showError('Number is invalid');   
+      }
+     })
+      
 
 
-    } catch (error) { console.error(error) }
+    
   }
 
   getCountries() {
     this.dataService.fetchCountries()
       .subscribe((data) => {
-        console.log(data)
         if(data){
           this.countries = data
           let keys = Object.keys(this.countries);
@@ -73,13 +75,22 @@ export class HomeComponent implements OnInit {
     
     this.phoneNumberValidationForm = this.fb.group({
       number: [null, [Validators.required]],
-      country_code: null
+      country_code: [null, [Validators.required]]
     })
   }
 
 
-  getRequiredMessage() {
+  getRequiredMessageForNumber() {
     if (this.phoneNumberValidationForm.controls.number.hasError('required'))
       return 'You must enter a phone number'
   }
+
+  getRequiredMessageForCode() {
+    if (this.phoneNumberValidationForm.controls.country_code.hasError('required'))
+      return 'You must enter country code'
+  }
+
+
 }
+
+

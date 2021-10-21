@@ -1,25 +1,36 @@
 /// <reference types="cypress" />
 
-describe("Ernest Assignment test", () => {
-    it("it should initialize page", () => {
-        cy.visit("http://localhost:4200");
-        // cy.get('#number').type('0547347529');
-        // cy.get('mat-select[formcontrolname="country_code"]').click();
-        // cy.get('mat-option').contains('GH').click();
-        // cy.get('#btn-test').click();
-});
+describe("Phone Validator", () => {
+    beforeEach(() => {
+        cy.visit("/");
+    })
 
-});
 
-it("should enter a valid ghana number ", () => {
-    cy.get('#number').type('0547347529');
-  });
+    it("Submit button should be disabled if form is invalid", () => {
 
-it("should select the ghana alpha2code from options ", () => {
-         cy.get('mat-select[formcontrolname="country_code"]').click();
-         cy.get('mat-option').contains('GH').click();
-  });
+        cy.get(":button").first().should("be.disabled");
+    });
+    it("Submit button should be enabled if form is valid", () => {
+        cy.get('#number').type('0547347529');
+        cy.get('mat-select[formcontrolname="country_code"]').click();
+        cy.get('mat-option').contains('GH').click();
+        cy.get(":button").first().should("be.enabled");
+    });
 
-  it("should click on the button and show success message if number is valid ", () => {
-    cy.get('#btn-test').click();
-  });
+    it("it should check for phone number validity if form is valid", () => {
+        cy.get('#number').type('0547347529');
+        cy.get('mat-select[formcontrolname="country_code"]').click();
+        cy.get('mat-option').contains('GH').click();
+        cy.get('#btn-test').click();
+        cy.wait(1000)
+        cy.get('#toast-container').should('exist')
+    });
+    it("it should check if phone number is invalid then show an error message invalid", () => {
+        cy.get('#number').type('0547529');
+        cy.get('mat-select[formcontrolname="country_code"]').click();
+        cy.get('mat-option').contains('GH').click();
+        cy.get('#btn-test').click();
+        cy.wait(1000)
+        cy.get('#toast-container').should('exist')
+    });
+})

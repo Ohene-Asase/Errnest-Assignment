@@ -10,7 +10,7 @@
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Enter number</mat-label>
         <input matInput id="number" formControlName="number" type="number" required>
-        <mat-error *ngIf="phoneNumberValidationForm.controls.number.invalid">{{ getRequiredMessage()}}</mat-error>
+        <mat-error *ngIf="phoneNumberValidationForm.controls.number.invalid">{{ getRequiredMessageForNumber()}}</mat-error>
        </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>alphaTwoCode</mat-label>
@@ -20,9 +20,10 @@
               {{countryDetail.alphaTwoCode}}
             </mat-option>
           </mat-select> 
+          <mat-error *ngIf="phoneNumberValidationForm.controls.country_code.invalid">{{ getRequiredMessageForCode()}}</mat-error>
       
         </mat-form-field>
-        <button type="submit" id="btn-test" class="btn btn-primary">Submit</button>
+        <button type="submit" id="btn-test" class="btn btn-primary" [disabled]="!phoneNumberValidationForm.valid">Submit</button>
  </form>
 </div>
 <div class="d-none d-md-flex col-12 col-md-6 d-flex align-items-center  justify-content-center" style="height: 600px; margin-left:-20px">
