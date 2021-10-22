@@ -26,8 +26,8 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Running end-to-end tests
 
 I used cypress for end to end testing,
-To run test application should be running
- Run `npm start`  to start application and Cypress at the same time
+To run test the application should be running
+Run `npm run cyoress`  to start application and Cypress at the same time
 
 ## Further help
 
