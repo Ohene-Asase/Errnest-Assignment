@@ -8,9 +8,8 @@ This project is hosted on netlify https://ernest-assignment.netlify.app
 
 ## Development server
 
-
-
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
 
 ## Code scaffolding
 
@@ -26,7 +25,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+I used cypress for end to end testing,
+To run test application should be running
+ Run `npm start`  to start application and Cypress at the same time
 
 ## Further help
 
