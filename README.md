@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
 
-This project is hosted on netlify http://ernest-assignment.netlify.app
+This project is hosted on netlify https://ernest-assignment.netlify.app
 
 
 
