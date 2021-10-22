@@ -9,14 +9,14 @@ import { Country, NumberVerificationResponse } from '../interface/data.model';
 })
 export class DataService {
   private readonly numberVerificationApi: string = 'http://apilayer.net/api/validate?access_key=eb588dbf70cb81df1c8d374269db9d18'
-  private readonly countriesApi: string = 'http://apilayer.net/api/countries?access_key=eb588dbf70cb81df1c8d374269db9d18';
+  private readonly countriesApi: string = 'https://apilayer.net/api/countries?access_key=eb588dbf70cb81df1c8d374269db9d18';
 
 
 
   constructor(private http: HttpClient) { }
 
   verifyNumber(param: any): Observable<NumberVerificationResponse> {
-   return this.http.get<NumberVerificationResponse>(`http://apilayer.net/api/validate?access_key=eb588dbf70cb81df1c8d374269db9d18&number=${param.number}&country_code=${param.country_code}`);
+   return this.http.get<NumberVerificationResponse>(`https://apilayer.net/api/validate?access_key=eb588dbf70cb81df1c8d374269db9d18&number=${param.number}&country_code=${param.country_code}`);
    
   }
 
